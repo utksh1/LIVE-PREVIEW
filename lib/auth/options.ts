@@ -1,4 +1,5 @@
-import { NextAuthOptions, User, JWT } from "next-auth";
+import { NextAuthOptions, User } from "next-auth";
+import type { JWT } from "next-auth/jwt";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
@@ -138,19 +139,22 @@ export const authOptions: NextAuthOptions = {
     },
     async session({ session, token }) {
       if (token) {
-        session.user = {
-          ...session.user,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (session as any).user = {
           id: token.userId as string,
           email: token.email as string,
           name: token.name as string,
           givenName: token.givenName as string,
           familyName: token.familyName as string,
           image: token.image as string,
-          preferences: token.preferences as any
+          preferences: token.preferences as unknown
         };
-        session.accessToken = token.accessToken as string;
-        session.refreshToken = token.refreshToken as string;
-        session.error = token.error as string;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (session as any).accessToken = token.accessToken as string;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (session as any).refreshToken = token.refreshToken as string;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (session as any).error = token.error as string;
       }
       return session;
     }

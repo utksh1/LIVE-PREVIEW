@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { parseCookies, setAuthCookie, clearAuthCookie } from "@/lib/auth/utils";
-import { jwtVerify } from "jose";
 
 const REFRESH_TOKEN_TTL = parseInt(process.env.REFRESH_TOKEN_TTL_SECONDS || "2592000"); // 30 days
 

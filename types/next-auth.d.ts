@@ -36,10 +36,13 @@ interface CustomJWT {
 }
 
 declare module "next-auth" {
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   interface Session extends CustomSession {}
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   interface User extends CustomUser {}
 }
 
 declare module "next-auth/jwt" {
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   interface JWT extends CustomJWT {}
 }
