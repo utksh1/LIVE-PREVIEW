@@ -41,7 +41,7 @@ export default function SignInPage() {
           router.push("/");
         }, 100);
       }
-    } catch (error) {
+    } catch {
       setError("An error occurred during sign in");
     } finally {
       setIsLoading(false);
@@ -54,7 +54,7 @@ export default function SignInPage() {
 
     try {
       await signIn(provider, { callbackUrl: "/" });
-    } catch (error) {
+    } catch {
       setError("An error occurred during OAuth sign in");
       setIsLoading(false);
     }
