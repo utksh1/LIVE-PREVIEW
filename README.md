@@ -20,6 +20,31 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Database (Prisma)
+
+Prisma is used as the data layer for authentication and persisted bookings.
+
+1. Copy environment variables:
+
+```bash
+cp .env.example .env
+```
+
+2. Update `DATABASE_URL` and the auth secrets in `.env`.
+
+3. Create/apply the database migration and generate the typed Prisma client:
+
+```bash
+npx prisma migrate dev --name auth-bookings
+npx prisma generate
+```
+
+You can import the reusable client anywhere in the app:
+
+```ts
+import { prisma } from "@/lib/prisma";
+```
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
